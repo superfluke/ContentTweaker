@@ -9,11 +9,22 @@ import net.minecraftforge.fluids.FluidStack;
 public class FluidContent extends Fluid {
     private FluidRepresentation fluidRepresentation;
 
-    public FluidContent(FluidRepresentation fluidRepresentation) {
-        super(fluidRepresentation.getUnlocalizedName(), new ResourceLocation(fluidRepresentation.getStillLocation()),
-                new ResourceLocation(fluidRepresentation.getFlowingLocation()));
-        this.fluidRepresentation = fluidRepresentation;
-        this.setValues();
+    public FluidRepresentation(String unlocalizedName, String color) {
+        this.unlocalizedName = unlocalizedName;
+        
+        int thickshaft = (int)(color.chars().filter(ch -> ch =='=').count())*32;
+        int thinshaft = (int)(color.chars().filter(ch -> ch =='-').count())*32;
+        int juice = (int)(color.chars().filter(ch -> ch =='~').count())*32;
+        
+        String hexy = "FF";
+        hexy += thickshaft==0?"00":Integer.toHexString(thickshaft);
+        hexy += thinshaft==0?"00":Integer.toHexString(thinshaft);
+        hexy += juice==0?"00":Integer.toHexString(juice);
+        color = hexy;
+        if(color.length() == 6)
+            color = "FF" + color;
+        int intFromHex = (int) Long.parseLong(color, 16);
+        this.color = intFromHex;
     }
 
     private void setValues() {
