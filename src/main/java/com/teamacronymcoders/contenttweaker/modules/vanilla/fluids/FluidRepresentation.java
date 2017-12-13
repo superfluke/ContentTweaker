@@ -50,8 +50,12 @@ public class FluidRepresentation implements IRepresentation<Fluid> {
     @ZenProperty
     public IBlockMaterialDefinition material = new BlockMaterialDefinition(Material.WATER);
 
-    public FluidRepresentation(String unlocalizedName, int color) {
+    public FluidRepresentation(String unlocalizedName, String color) {
         this.unlocalizedName = unlocalizedName;
+        if(color.length() == 6)
+            color = "FF" + color;
+        int intFromHex = (int) Long.parseLong(color, 16);
+        this.color = intFromHex;
         this.color = color;
     }
 
