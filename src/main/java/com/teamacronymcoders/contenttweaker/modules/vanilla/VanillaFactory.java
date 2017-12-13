@@ -59,7 +59,7 @@ public class VanillaFactory {
     }
 
     @ZenMethod
-    public static FluidRepresentation createFluid(String unlocalizedName, int color) {
+    public static FluidRepresentation createFluid(String unlocalizedName, String color) {
         return new FluidRepresentation(unlocalizedName, color);
     }
 }
